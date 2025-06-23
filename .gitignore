@@ -1,0 +1,58 @@
+# .gitignore
+
+# macOS system files
+.DS_Store
+
+# Node.js dependencies
+node_modules/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# VS Code settings
+.vscode/
+
+# Compiled binaries
+*.exe
+*.out
+*.o
+
+# Build directories
+dist/
+build/
+
+# Python virtual environment
+.venv/
+venv/
+env/
+
+# Poetry
+poetry.lock
+
+# Yarn
+yarn.lock
+
+# Coverage reports
+coverage/
+.coverage
+.coverage.*
+
+# Cache directories
+.cache/
+.pytest_cache/
+.mypy_cache/
+
+# IDE files
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+Thumbs.db

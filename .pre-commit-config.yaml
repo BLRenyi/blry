@@ -27,3 +27,23 @@ repos:
     rev: 7.3.0
     hooks:
       - id: flake8
+
+  # JavaScript formatting and linting
+  - repo: local
+    hooks:
+      - id: eslint
+        name: eslint
+        entry: eslint
+        language: node
+        files: \.(js|jsx|ts|tsx)$
+        additional_dependencies:
+          - eslint@^9.29.0
+          - eslint-config-prettier@^10.1.5
+      - id: prettier
+        name: prettier
+        entry: prettier
+        args: ["--check"]
+        language: node
+        files: \.(js|jsx|ts|tsx|json|css|md)$
+        additional_dependencies:
+          - prettier@^3.6.0

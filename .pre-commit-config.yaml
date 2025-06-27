@@ -47,3 +47,15 @@ repos:
         files: \.(js|jsx|ts|tsx|json|css|md)$
         additional_dependencies:
           - prettier@^3.6.0
+
+  # Project metadata consistency check
+  - repo: local
+    hooks:
+      - id: check-project-consistency
+        name: Check project metadata consistency
+        entry: python scripts/check_project_consistency.py
+        language: python
+        files: '(pyproject\.toml|package\.json)$'
+        pass_filenames: false
+        additional_dependencies:
+          - tomlkit==0.12.0

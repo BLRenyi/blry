@@ -1,5 +1,20 @@
 # .gitignore
 
+# Build directories
+build/
+dist/
+
+# Compiled binaries
+*.exe
+*.o
+*.out
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
 # macOS system files
 .DS_Store
 
@@ -7,23 +22,8 @@
 node_modules/
 
 # Python cache
-__pycache__/
 *.pyc
-
-# Logs
-*.log
-
-# Environment variables
-.env
+__pycache__/
 
 # VS Code settings
 .vscode/
-
-# Compiled binaries
-*.exe
-*.out
-*.o
-
-# Build directories
-dist/
-build/

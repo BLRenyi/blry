@@ -59,3 +59,13 @@ repos:
         pass_filenames: false
         additional_dependencies:
           - tomlkit==0.12.0
+
+  # Commit message formatting
+  - repo: local
+    hooks:
+      - id: capitalize-commit-msg
+        name: Capitalize commit message
+        entry: bash -c 'first_char=$(head -c 1 "$1"); rest=$(tail -c +2 "$1"); echo "${first_char^}${rest}" > "$1"' --
+        language: system
+        stages: [commit-msg]
+        pass_filenames: true

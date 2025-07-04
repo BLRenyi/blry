@@ -1,7 +1,25 @@
 # .gitignore
 
+## The list below is sorted alphabetically by headings, with the file patterns
+## under each heading also sorted alphabetically.
+
 # macOS system files
 .DS_Store
+
+# Compiled binaries
+*.exe
+*.o
+*.out
+
+# Build directories
+build/
+dist/
+
+# Environment variables
+.env
+
+# Logs
+*.log
 
 # Node.js dependencies
 node_modules/
@@ -10,20 +28,5 @@ node_modules/
 __pycache__/
 *.pyc
 
-# Logs
-*.log
-
-# Environment variables
-.env
-
 # VS Code settings
 .vscode/
-
-# Compiled binaries
-*.exe
-*.out
-*.o
-
-# Build directories
-dist/
-build/

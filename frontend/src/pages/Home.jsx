@@ -7,16 +7,26 @@ function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
+
     axios('http://localhost:8000/api/hello/')
       .then((res) => {
-        setMessage(res.data.message);
-        setLoading(false);
+        if (isMounted) {
+          setMessage(res.data.message);
+          setLoading(false);
+        }
       })
       .catch((err) => {
         console.error('API connection failed:', err);
-        setMessage('Backend connection unavailable');
-        setLoading(false);
+        if (isMounted) {
+          setMessage('Backend connection unavailable');
+          setLoading(false);
+        }
       });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (

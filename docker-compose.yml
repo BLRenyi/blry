@@ -1,0 +1,18 @@
+services:
+  backend:
+    build: ./backend
+    command: poetry run python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    working_dir: /app
+    command: ["yarn", "dev"]
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules # Prevents overwriting container's node_modules
+    ports:
+      - "5173:5173"

@@ -1,6 +1,24 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import './Home.css';
 
 function Home() {
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios('http://localhost:8000/api/hello/')
+      .then((res) => {
+        setMessage(res.data.message);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('API connection failed:', err);
+        setMessage('Backend connection unavailable');
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <div className="home">
       <div className="hero">
@@ -8,6 +26,11 @@ function Home() {
         <p className="hero-subtitle">
           A modern React application with Django backend integration
         </p>
+        {loading ? (
+          <p>Connecting to backend...</p>
+        ) : (
+          <p className="api-status">Backend says: {message}</p>
+        )}
         <div className="hero-features">
           <div className="feature">
             <h3>⚛️ React 19</h3>

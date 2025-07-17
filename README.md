@@ -2,13 +2,6 @@
 
 This repository contains the codebase for the BLRY project.
 
-## Quick Start
+## Development Setup
 
-For development setup instructions, see [Development Setup](docs/development-setup.md).
-
-## Project Overview
-
-- **Backend**: Django (Python)
-- **Frontend**: React (JavaScript)
-- **Package Management**: Poetry (Python), Yarn (JavaScript)
-- **Code Quality**: Pre-commit hooks with Black, Flake8, ESLint, Prettier
+For development tooling setup (linting, formatting, pre-commit hooks), see [Tooling Setup](docs/tooling-setup.md).

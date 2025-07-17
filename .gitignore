@@ -1,4 +1,5 @@
-# .gitignore
+## The list below is sorted alphabetically by headings, with the file patterns
+## under each heading also sorted alphabetically.
 
 # Build directories
 build/
@@ -22,8 +23,8 @@ dist/
 node_modules/
 
 # Python cache
-*.pyc
 __pycache__/
+*.pyc
 
 # VS Code settings
 .vscode/

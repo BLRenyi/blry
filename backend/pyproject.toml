@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "backend"
+version = "0.1.0"
+description = ""
+# TODO(FlyCloud): replace it with the team dev email
+authors = ["BLRY Dev Team <fly.cloud.blry@gmail.com>"]
+package-mode = false  # disables package install step
+
+[tool.poetry.dependencies]
+python = ">=3.10"
+django = "^5.2"
+djangorestframework = ">=3.16.0,<4.0.0"
+djangorestframework-simplejwt = "^5.3.0"
+django-cors-headers = ">=4.7.0,<5.0.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

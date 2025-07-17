@@ -4,14 +4,14 @@
 # macOS system files
 .DS_Store
 
+# Build directories
+build/
+dist/
+
 # Compiled binaries
 *.exe
 *.o
 *.out
-
-# Build directories
-build/
-dist/
 
 # Environment variables
 .env

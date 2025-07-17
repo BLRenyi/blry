@@ -17,9 +17,9 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: Implement form submission when backend is ready
+    // TODO: Implement form submission API integration
     alert(
-      'Form submission will be implemented when Django backend is connected!'
+      'Form submission will be implemented when API endpoints are integrated!'
     );
     console.log('Form data:', formData);
   };
@@ -30,7 +30,7 @@ function Contact() {
         <h1>Contact Us</h1>
         <p className="contact-intro">
           Get in touch with us! This form will be connected to our Django
-          backend in a future update.
+          backend once the API endpoints are integrated.
         </p>
 
         <div className="contact-container">
@@ -84,13 +84,15 @@ function Contact() {
             <div className="info-item">
               <h3>🚀 Development Status</h3>
               <p>Frontend: ✅ Complete</p>
-              <p>Backend: 🔄 Coming Soon</p>
+              <p>Backend: ✅ Django Setup Complete</p>
+              <p>Integration: 🔄 In Progress</p>
             </div>
             <div className="info-item">
-              <h3>📧 Future Features</h3>
+              <h3>📧 Next Steps</h3>
+              <p>API endpoint integration</p>
               <p>Contact form submission</p>
               <p>User authentication</p>
-              <p>Data persistence</p>
+              <p>Database integration</p>
             </div>
           </div>
         </div>

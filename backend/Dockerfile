@@ -44,6 +44,3 @@ RUN poetry install --no-interaction --no-ansi
 # the /app/ directory of the container.
 # This happens after installing dependencies to leverage Docker layer caching.
 COPY . /app/
-
-# Start the Django backend server by default
-CMD ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]

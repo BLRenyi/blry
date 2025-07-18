@@ -10,7 +10,7 @@ services:
   frontend:
     build: ./frontend
     working_dir: /app
-    command: ["yarn", "dev"]
+    command: yarn dev --host
     volumes:
       - ./frontend:/app
       - /app/node_modules # Prevents overwriting container's node_modules

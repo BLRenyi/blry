@@ -1,22 +1,15 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Layout from './layouts/Layout';
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import './App.css';
+import axios from 'axios';
+import { useEffect, useState } from 'react'
 
 function App() {
-  return (
-    <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </Layout>
-    </Router>
-  );
+  const [message, setMessage] = useState('')
+
+  useEffect(() => {
+    axios('http://localhost:8000/api/hello/')
+      .then(res => setMessage(res.data.message))
+  }, [])
+
+  return <div><header>{message}</header></div>
 }
 
 export default App;

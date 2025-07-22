@@ -1,15 +1,35 @@
 from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
 class SignupSerializer(serializers.ModelSerializer):
     # Ensure that the password may be used when updating or creating an
     # instance, but is not included when serializing the representation.
-    password = serializers.CharField(write_only=True)
+    password = serializers.CharField(
+        write_only=True, required=True, validators=[validate_password])
+    password_to_confirm = serializers.CharField(
+        write_only=True, required=True)
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password')
+        fields = (
+            'username', 'email', 'first_name', 'last_name',
+            'password', 'password_to_confirm')
+
+    def validate(self, attrs):
+        if attrs['password'] != attrs['password_to_confirm']:
+            raise serializers.ValidationError({
+                "password": "Password fields didn't match."
+            })
+        return attrs
 
     def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
+        user = User.objects.create(
+            username=validated_data['username'],
+            email=validated_data.get('email', ''),
+            first_name=validated_data.get('first_name', ''),
+            last_name=validated_data.get('last_name', ''),
+        )
+        user.set_password(validated_data['password'])
+        user.save()
         return user

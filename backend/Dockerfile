@@ -13,7 +13,10 @@ ENV PYTHONUNBUFFERED=1
 ##                      (common in Python packages).
 ##
 ## - `curl`:            Used to fetch `Poetry` installer in the next step.
-RUN apt-get update && apt-get install -y build-essential curl
+##
+## -- `libpq-dev`:      PostgreSQL client libraries (needed by psycopg for
+##                      PostgreSQL DB support).
+RUN apt-get update && apt-get install -y build-essential curl libpq-dev
 
 # Install `Poetry`
 ## Downloads and installs `Poetry` using the official installation script.
@@ -44,3 +47,6 @@ RUN poetry install --no-interaction --no-ansi
 # the /app/ directory of the container.
 # This happens after installing dependencies to leverage Docker layer caching.
 COPY . /app/
+
+# Optional. But good practice to include.
+EXPOSE 8000

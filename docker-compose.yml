@@ -1,11 +1,26 @@
 services:
+  db:
+    image: postgres:17
+    env_file:
+      - .env
+    volumes:
+      # Mount a named volume called pgdata into the Postgres container at the
+      # path where Postgres stores data.
+      - pgdata:/var/lib/postgresql/data/
+
   backend:
     build: ./backend
-    command: poetry run python manage.py runserver 0.0.0.0:8000
+    command: >
+      sh -c "poetry run python manage.py migrate &&
+             poetry run python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./backend:/app
     ports:
       - "8000:8000"
+    depends_on:
+      - db
+    env_file:
+      - .env
 
   frontend:
     build: ./frontend
@@ -16,3 +31,8 @@ services:
       - /app/node_modules # Prevents overwriting container's node_modules
     ports:
       - "5173:5173"
+
+volumes:
+  # Require `pgdata` to be a managed volume created and controlled by Docker
+  # itself.
+  pgdata:

@@ -7,12 +7,13 @@ authors = ["BLRY Dev Team <fly.cloud.blry@gmail.com>"]
 package-mode = false  # disables package install step
 
 [tool.poetry.dependencies]
-python = ">=3.10"
+python = ">=3.10,<4.0"
 django = "^5.2"
 djangorestframework = ">=3.16.0,<4.0.0"
 djangorestframework-simplejwt = "^5.3.0"
 django-cors-headers = ">=4.7.0,<5.0.0"
 psycopg2-binary = "^2.9"
+djoser = "^2.3.3"
 python-dotenv = "^1.1.1"
 
 [tool.poetry.group.dev.dependencies]

@@ -1,56 +1,37 @@
-import React, { useState, useEffect } from "react";
-import Login from "./components/auth/Login";
-import Signup from "./components/auth/Signup";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './Home';
+import Registration from './components/reg/Registration';
+import ViewStep from './components/reg/ViewStep';
+import ViewAllSites from './components/reg/ViewAllSites';
+import Approval from './components/regadmin/Approval';
+import ViewUserStep from './components/regadmin/ViewUserStep';
+import SetupStep from './components/regadmin/SetupStep';
+import ViewSysStep from './components/regadmin/ViewSysStep';
+import CreateSysStep from './components/regadmin/CreateSysStep';
+import ViewSysQuestion from './components/regadmin/ViewSysQuestion';
+import CreateSysQuestion from './components/regadmin/CreateSysQuestion';
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showSignup, setShowSignup] = useState(false);
-  const [signupError, setSignupError] = useState("");
-
-  // On mount, check if access token exists
-  useEffect(() => {
-    const access_token = localStorage.getItem("access_token");
-    if (access_token) {
-      setIsLoggedIn(true);
-    }
-  }, []);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    localStorage.clear();
-    setIsLoggedIn(false);
-  };
-
   return (
-    <div>
-      {isLoggedIn ? (
-        <div>
-          <h2>Welcome BLRY!</h2>
-          <button onClick={handleLogout}>Logout</button>
-        </div>
-      ) : showSignup ? (
-        <>
-          <Signup
-            onSignupSuccess={() => {
-              setSignupError(""); // Clear error on success
-              setShowSignup(false); // Go back to login
-            }}
-            setSignupError={setSignupError} // Pass down
-          />
-          {signupError && <p style={{ color: "red" }}>{signupError}</p>}
-        </>
-      ) : (
-        <Login onLogin={handleLogin} />
-      )}
+    <BrowserRouter>
+    <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/register" element={<Registration />}>
+          <Route path="/register/:stepid" element={<ViewStep />}>
 
-      {!isLoggedIn && (
-        <button onClick={() => setShowSignup(!showSignup)}>
-          {showSignup ? "Go to Login" : "Go to Signup"}
-        </button>
-      )}
-    </div>
+          </Route>
+        </Route>
+        <Route path="/regstep" element={<ViewAllSites />}>
+        </Route>
+        <Route path="/regadmin/approval" element={<Approval />}></Route>
+        <Route path="/regadmin/approval/:regid/:stepid" element={<ViewUserStep />} />
+        <Route path="/regadmin/setupstep" element={<SetupStep />}></Route>
+        <Route path="/regadmin/setupstep/:stepid" element={<ViewSysStep />} />
+        <Route path="/regadmin/setupstep/createstep" element={<CreateSysStep />} />
+        <Route path="/regadmin/setupstep/question/:questionid" element={<ViewSysQuestion />} />
+        <Route path="/regadmin/setupstep/createquestion/:stepid" element={<CreateSysQuestion />} />
+      </Routes>
+    </BrowserRouter>    
   );
 }

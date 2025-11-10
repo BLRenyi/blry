@@ -10,9 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 from dotenv import load_dotenv
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'rest_framework',
     'rest_framework_simplejwt',
+    'registration'
 ]
 # For React to connect Django, which do Cross-Origin Resource Sharing.
 INSTALLED_APPS += ['corsheaders']
@@ -90,7 +91,10 @@ SECRET_KEY = os.getenv('BLRY_WEBSITE_SECRET_KEY', 'insecure-dev-key')
 # should be included in the production codes.
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1'''
+    ]
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -126,15 +130,17 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+DATABASES_HOST = 'localhost'
+if(os.getenv('IS_DOCKER') == 'true'):
+    DATABASES_HOST = 'db'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('POSTGRES_DB', 'postgres'),
         'USER': os.getenv('POSTGRES_USER', 'postgres'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'blry'),
         # The default value 'db' is for Dokcer; 'localhost' is for local.
-        'HOST': os.getenv('DB_HOST', 'db'),
+        'HOST': DATABASES_HOST,
         'PORT': os.getenv('DB_PORT', '5432'),
     }
 }

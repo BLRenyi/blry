@@ -37,9 +37,9 @@ export const login = async (credentials) => {
     const { access, refresh } = response.data;
 
     axios.defaults.headers.common["Authorization"] = `Bearer ${access}`;
-    localStorage.setItem("accessToken", access);
+    localStorage.setItem("access_token", access);
     localStorage.setItem("refreshToken", refresh);
-
+    //localStorage.setItem("isRegular", false);
     return response.data;
   } catch (error) {
     console.error("Login error:", error.response?.data || error.message);

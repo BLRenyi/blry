@@ -24,6 +24,7 @@ RUN apt-get update && apt-get install -y build-essential curl libpq-dev
 ## later steps.
 RUN curl -sSL https://install.python-poetry.org | python3 -
 ENV PATH="/root/.local/bin:$PATH"
+ENV IS_DOCKER=true
 
 # Sets the working directory inside the container to /app.
 ## All following `COPY`, `RUN`, `CMD`, etc., happen inside this folder.

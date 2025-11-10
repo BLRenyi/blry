@@ -1,0 +1,4 @@
+.card-title-fixed-height {
+      height: 100px;
+      overflow: hidden; /* Optional: hides overflowing text */
+    }

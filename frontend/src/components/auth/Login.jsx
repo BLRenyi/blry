@@ -13,15 +13,43 @@ export default function Login({ onLogin }) {
     try {
       const res = await login(credentials);
       if (res.access) {
+        //console.log('Login Res', res);
         localStorage.setItem("access_token", res.access);
         localStorage.setItem("refresh_token", res.refresh);
-        onLogin();
+        localStorage.setItem("username", credentials.username);
+        //--- This needs to be replaced as the real logic to tell the user status ---//
+        if(credentials.username.startsWith('testnew'))
+        {
+          localStorage.setItem("is_regular", false);
+        }
+        else
+        { 
+          localStorage.setItem("is_regular", true);
+          if(credentials.username.startsWith('agafil'))
+          {
+            localStorage.setItem("is_super", true);
+          }
+          else
+          { 
+            localStorage.setItem("is_super", false);
+          }
+        }
+        try
+        {
+          onLogin();
+        }
+        catch
+        {
+          //--- Do Nothing ---//
+        } 
+        window.location.href = "/home";
       } else {
+        alert('Login Failed')
         console.error("Login failed: The server didn't return valid access info.");
       }
     } catch (error) {
+      alert('Login Error')
       console.error("Login error:", error);
-      alert("Login failed: Invalid username or password.");
     }
   };
 

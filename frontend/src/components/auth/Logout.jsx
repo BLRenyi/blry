@@ -1,18 +1,17 @@
 import React from "react";
 import { logout } from "../../api/authAPI";
 
-const Logout = () => {
-  const handleLogout = async () => {
+export default function Logout({ onLogout }) {
+  const handleServerLogout = async () => {
+    alert(123)
     const refreshToken = localStorage.getItem("refresh_token");
     await logout(refreshToken);
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
-
+    localStorage.removeItem("is_regular");  
     // Redirect to login or homepage
-    window.location.href = "/accounts/login";
+    onLogout();
+    window.location.href = "/home";
   };
-
-  return <button onClick={handleLogout}>Logout</button>;
-};
-
-export default Logout;
+  return <button onClick={handleServerLogout}>Logout</button>;
+}
